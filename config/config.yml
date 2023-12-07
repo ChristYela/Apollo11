@@ -1,0 +1,5 @@
+intervalo_simulacion: 20
+max_archivos_generados: 100
+ruta_dispositivos: "devices"
+ruta_respaldos: "backups"
+ruta_informes: "reports"
