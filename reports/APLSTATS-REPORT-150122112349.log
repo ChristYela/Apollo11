@@ -1,0 +1,38 @@
+Reporte de Estadísticas
+
+Misión: ORBONE
+excellent: 2 eventos
+good: 1 eventos
+warning: 0 eventos
+faulty: 0 eventos
+killed: 0 eventos
+unknown: 0 eventos
+
+Misión: GALXONE
+excellent: 0 eventos
+good: 0 eventos
+warning: 0 eventos
+faulty: 1 eventos
+killed: 0 eventos
+unknown: 2 eventos
+
+Gestión de Desconexiones
+Misión ORBONE: 0 desconexiones
+Misión GALXONE: 2 desconexiones
+
+Consolidación de Misiones
+Total de dispositivos inoperables: 1
+
+Cálculo de Porcentajes
+ORBONE - excellent: 66.67%
+ORBONE - good: 33.33%
+ORBONE - warning: 0.00%
+ORBONE - faulty: 0.00%
+ORBONE - killed: 0.00%
+ORBONE - unknown: 0.00%
+GALXONE - excellent: 0.00%
+GALXONE - good: 0.00%
+GALXONE - warning: 0.00%
+GALXONE - faulty: 100.00%
+GALXONE - killed: 0.00%
+GALXONE - unknown: 0.00%
