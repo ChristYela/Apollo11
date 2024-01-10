@@ -1,3 +1,4 @@
+# apollo11/dashboard_generator.py
 import os
 import logging
 import json
@@ -19,9 +20,9 @@ class DashboardGenerator:
             }
 
         with open(dashboard_path, 'w') as dashboard_file:
-            # Ajustar el formato y contenido del archivo JSON según las necesidades específicas
             dashboard_file.write(json.dumps(dashboard_data, indent=2))
 
         logging.info(f"Tablero de control actualizado: {dashboard_filename}")
+
 
 
