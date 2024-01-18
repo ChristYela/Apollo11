@@ -1,10 +1,10 @@
-
 # apollo11.py
 import sys
 import logging
 from argparse import ArgumentParser
-import yaml
+import yaml 
 from apollo11.simulator import Apolo11Simulator
+
 
 def main():
     try:
@@ -29,7 +29,7 @@ def main():
                 max_files=config['max_archivos_generados'],
                 project=args.project
             )
-            apollo_simulator.run_simulation()
+            apollo_simulator.run_simulation(num_cycles=10)
 
     except Exception as e:
         # Manejo de excepciones y registro en LOGGING
