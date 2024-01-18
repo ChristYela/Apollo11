@@ -35,6 +35,10 @@ class DataGenerator:
         return data
 
     def generate_hash(self, mission: str, device_type: str, device_status: str) -> str:
+        # Generar hash solo si la misión no es "unknown"
+        if mission == "UNKN":
+            return "unknown"
+
         data_to_hash = f"{datetime.now().strftime('%d%m%y%H%M%S')}{mission}{device_type}{device_status}"
         hash_value = hashlib.sha256(data_to_hash.encode()).hexdigest()
         return hash_value
