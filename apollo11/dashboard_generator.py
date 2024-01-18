@@ -6,6 +6,10 @@ from datetime import datetime
 from typing import Dict, List
 
 class DashboardGenerator:
+    def __init__(self):
+        # Inicializa el atributo mission_device_states como un diccionario vacío
+        self.mission_device_states: Dict[str, Dict[str, int]] = {}
+
     def generate_dashboard(self, data: Dict[str, List[Dict[str, str]]]):
         dashboard_filename = 'dashboard.json'
         dashboard_path = os.path.join('reports', dashboard_filename)
@@ -23,6 +27,4 @@ class DashboardGenerator:
             dashboard_file.write(json.dumps(dashboard_data, indent=2))
 
         logging.info(f"Tablero de control actualizado: {dashboard_filename}")
-
-
 
