@@ -1,4 +1,5 @@
 # apollo11/report_generator.py
+
 import os
 import logging
 from datetime import datetime
@@ -10,6 +11,12 @@ class ReportGenerator:
         self.project_device_states: Dict[str, Dict[str, int]] = {}
 
     def generate_reports(self, data: Dict[str, List[Dict[str, str]]]):
+        """
+        Genera informes consolidados a partir de los datos simulados.
+
+        Parameters:
+        - data (Dict[str, List[Dict[str, str]]]): Un diccionario que contiene información de dispositivos por misión.
+        """
         # Inicializar el diccionario si aún no ha sido inicializado
         if not isinstance(self.project_device_states, dict):
             self.project_device_states = {}
@@ -51,4 +58,10 @@ class ReportGenerator:
             logging.info(f"Informe consolidado generado: {report_filename}")
 
     def get_current_timestamp(self):
+        """
+        Obtiene la marca de tiempo actual en el formato '%Y%m%d%H%M%S'.
+
+        Returns:
+        - str: Marca de tiempo actual.
+        """
         return datetime.now().strftime('%Y%m%d%H%M%S')
