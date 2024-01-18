@@ -1,0 +1,22 @@
+Reporte de Estadísticas
+
+
+Misión: GALXONE
+excellent: 6 eventos
+good: 1 eventos
+warning: 3 eventos
+faulty: 1 eventos
+killed: 4 eventos
+unknown: 2 eventos
+Gestión de Desconexiones en la Misión GALXONE: 2 desconexiones
+
+Consolidación de Misiones
+Total de dispositivos inoperables: 1
+
+Cálculo de Porcentajes
+GALXONE - excellent: 35.29%
+GALXONE - good: 5.88%
+GALXONE - warning: 17.65%
+GALXONE - faulty: 5.88%
+GALXONE - killed: 23.53%
+GALXONE - unknown: 11.76%

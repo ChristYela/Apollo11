@@ -1,0 +1,22 @@
+Reporte de Estadísticas
+
+
+Misión: UNKN
+excellent: 14 eventos
+good: 10 eventos
+warning: 17 eventos
+faulty: 17 eventos
+killed: 18 eventos
+unknown: 14 eventos
+Gestión de Desconexiones en la Misión UNKN: 14 desconexiones
+
+Consolidación de Misiones
+Total de dispositivos inoperables: 17
+
+Cálculo de Porcentajes
+UNKN - excellent: 15.56%
+UNKN - good: 11.11%
+UNKN - warning: 18.89%
+UNKN - faulty: 18.89%
+UNKN - killed: 20.00%
+UNKN - unknown: 15.56%
