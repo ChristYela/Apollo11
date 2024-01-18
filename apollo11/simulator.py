@@ -3,6 +3,8 @@ from typing import Dict, List
 from datetime import datetime
 import logging
 import time
+import signal
+import sys
 from apollo11.data_generator import DataGenerator
 from apollo11.file_manager import FileManager
 from apollo11.report_generator import ReportGenerator
@@ -18,14 +20,23 @@ class Apolo11Simulator:
         self.report_generator = ReportGenerator()
         self.dashboard_generator = DashboardGenerator()
 
-    def run_simulation(self, num_cycles: int):
-        for _ in range(num_cycles):
-            data = self.data_generator.generate_data(self.max_files, self.project)
-            self.file_manager.manage_files(data)
-            self.report_generator.generate_reports(data)
-            self.file_manager.move_processed_files()
-            self.dashboard_generator.generate_dashboard(data)
-            logging.info("Ciclo completado. Esperando el próximo ciclo...")
+        signal.signal(signal.SIGINT, self.handle_interrupt)
 
-            # Agregar lógica para esperar el intervalo de simulación.
-            time.sleep(self.simulation_interval)
+    def run_simulation(self, num_cycles: int):
+        try:
+            for _ in range(num_cycles):
+                data = self.data_generator.generate_data(self.max_files, self.project)
+                self.file_manager.manage_files(data)
+                self.report_generator.generate_reports(data)
+                self.file_manager.move_processed_files()
+                self.dashboard_generator.generate_dashboard(data)
+                
+                logging.info("Ciclo completado. Esperando el próximo ciclo...")
+                time.sleep(self.simulation_interval)
+
+        except KeyboardInterrupt:
+            self.handle_interrupt(None, None)
+            #interrupción del ciclo con CTRL+C
+    def handle_interrupt(self, signum, frame):
+        logging.info("Simulación interrumpida por el usuario. Finalizando...")
+        sys.exit(0)
