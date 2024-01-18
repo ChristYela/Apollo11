@@ -30,7 +30,7 @@ Random quantity of files (1-100) per execution. Semi-structured data: date, miss
 
 ### Naming and Hash Generation
 
-Mission names match the original project names. Hash is generated if the filename is not "unknown."
+Mission names match the original project names. Hash is generated if the filename even if the device status is not "unknown."
 
 ### Report Generation
 
@@ -62,6 +62,12 @@ Simulated data mimics the behavior of real data, providing a safe way to test al
 ## File Structuring
 
 Each file is associated with an execution cycle, ensuring precise control and optimal data management.
+
+## Usage 
+
+"python apollo11.py --config config/config.yml --project [ORBONE|CLNM|TMRS|GALXONE|UNKN]"
+
+"Make sure to provide the --config argument with the path to the YAML configuration file."
 
 
 
