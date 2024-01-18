@@ -1,4 +1,5 @@
 # apollo11/data_generator.py
+
 import os
 import random
 import hashlib
@@ -10,6 +11,16 @@ class DataGenerator:
     DEVICE_STATES = ["excellent", "good", "warning", "faulty", "killed", "unknown"]
 
     def generate_data(self, max_files: int, project: str) -> Dict[str, List[Dict[str, str]]]:
+        """
+        Genera datos simulados para dispositivos en una misión.
+
+        Parameters:
+        - max_files (int): La cantidad máxima de archivos a generar.
+        - project (str): La misión para la cual se generarán los datos.
+
+        Returns:
+        Dict[str, List[Dict[str, str]]]: Un diccionario que contiene información de dispositivos por misión.
+        """
         data = {}
 
         for _ in range(random.randint(1, max_files)):
@@ -17,8 +28,10 @@ class DataGenerator:
             device_type = f'device_{random.randint(1, 10)}'
             device_status = random.choice(self.DEVICE_STATES)
 
+            # Generar hash para la misión y el estado conocidos
             hash_value = self.generate_hash(mission, device_type, device_status)
 
+            # Contenido del archivo simulado
             file_content = {
                 "date": datetime.now().strftime("%d%m%y%H%M%S"),
                 "mission": mission,
@@ -27,6 +40,7 @@ class DataGenerator:
                 "hash": hash_value[:32]  # Tomar solo los primeros 32 caracteres del hash
             }
 
+            # Almacenar datos en el diccionario por misión
             if project not in data:
                 data[project] = []
 
@@ -35,10 +49,22 @@ class DataGenerator:
         return data
 
     def generate_hash(self, mission: str, device_type: str, device_status: str) -> str:
+        """
+        Genera un hash para la información dada.
+
+        Parameters:
+        - mission (str): La misión del dispositivo.
+        - device_type (str): El tipo de dispositivo.
+        - device_status (str): El estado del dispositivo.
+
+        Returns:
+        str: El hash generado.
+        """
         # Generar hash solo si la misión no es "unknown"
         if mission == "UNKN":
             return "unknown"
 
+        # Calcular el hash utilizando la información proporcionada
         data_to_hash = f"{datetime.now().strftime('%d%m%y%H%M%S')}{mission}{device_type}{device_status}"
         hash_value = hashlib.sha256(data_to_hash.encode()).hexdigest()
         return hash_value
