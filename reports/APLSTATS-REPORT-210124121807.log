@@ -1,0 +1,1 @@
+{"UNKN": {"device_status": {"excellent": 12, "good": 15, "warning": 20, "faulty": 16, "killed": 22, "unknown": 14}, "disconnections": 14, "inoperable_devices": 38, "percentages": {"excellent": 12.121212121212121, "good": 15.151515151515152, "warning": 20.2020202020202, "faulty": 16.161616161616163, "killed": 22.22222222222222, "unknown": 14.14141414141414}}}

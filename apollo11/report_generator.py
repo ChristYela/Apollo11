@@ -2,13 +2,16 @@
 
 import os
 import logging
+import json
 from datetime import datetime
 from typing import Dict, List
+
 
 class ReportGenerator:
     def __init__(self):
         # Inicializa el atributo project_device_states como un diccionario vacío
         self.project_device_states: Dict[str, Dict[str, int]] = {}
+        self.report: Dict[str, List[Dict]] = {}
 
     def generate_reports(self, data: Dict[str, List[Dict[str, str]]]):
         """
@@ -23,39 +26,42 @@ class ReportGenerator:
 
         # Actualizar el diccionario con nuevos datos
         for project, files in data.items():
-            project_states = {'excellent': 0, 'good': 0, 'warning': 0, 'faulty': 0, 'killed': 0, 'unknown': 0}
+            project_states = {'excellent': 0, 'good': 0,
+                              'warning': 0, 'faulty': 0, 'killed': 0, 'unknown': 0}
             for file_content in files:
                 project_states[file_content['device_status']] += 1
             self.project_device_states[project] = project_states
-
         # Generar un único informe consolidado
         report_filename = f'APLSTATS-REPORT-{datetime.now().strftime("%d%m%y%H%M%S")}.log'
         report_path = os.path.join('reports', report_filename)
+        percentages = {}
+        mision_status = {}
+        device_dict = {}
+        for project, device_states in self.project_device_states.items():
+            for state, count in device_states.items():
+                device_dict[state] = count
+            mision_status['device_status'] = device_dict
+            mision_status['disconnections'] = device_dict['unknown']
+            mision_status['inoperable_devices'] = device_dict['faulty'] + \
+                device_dict['killed']
+        for project in self.project_device_states.keys():
+            total_devices = sum(
+                device_states[state] for state in self.project_device_states[project])
+            for state in self.project_device_states[project]:
+                state_count = self.project_device_states[project][state]
+                percentage = (state_count / total_devices) * \
+                    100 if total_devices > 0 else 0
+                percentages[state] = percentage
+        mision_status['total_devices'] = total_devices
+        mision_status['percentages'] = percentages
+        self.report[project] = mision_status
+
+        logging.info(f"Informe consolidado generado: {report_filename}")
+        logging.info(self.project_device_states)
+        logging.info(self.report)
 
         with open(report_path, 'w', encoding='utf-8') as report_file:
-            report_file.write("Reporte de Estadísticas\n\n")
-
-            for project, device_states in self.project_device_states.items():
-                report_file.write(f"\nMisión: {project}\n")
-                for state, count in device_states.items():
-                    report_file.write(f"{state}: {count} eventos\n")
-
-                unknown_count = device_states['unknown']
-                report_file.write(f"Gestión de Desconexiones en la Misión {project}: {unknown_count} desconexiones\n\n")
-
-            report_file.write("Consolidación de Misiones\n")
-            total_faulty_devices = sum(device_states['faulty'] for device_states in self.project_device_states.values())
-            report_file.write(f"Total de dispositivos inoperables: {total_faulty_devices}\n\n")
-
-            report_file.write("Cálculo de Porcentajes\n")
-            for project in self.project_device_states.keys():
-                total_devices = sum(device_states[state] for state in self.project_device_states[project])
-                for state in self.project_device_states[project]:
-                    state_count = self.project_device_states[project][state]
-                    percentage = (state_count / total_devices) * 100 if total_devices > 0 else 0
-                    report_file.write(f"{project} - {state}: {percentage:.2f}%\n")
-
-            logging.info(f"Informe consolidado generado: {report_filename}")
+            report_file.write(json.dumps(self.report))
 
     def get_current_timestamp(self):
         """

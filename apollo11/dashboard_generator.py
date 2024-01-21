@@ -3,8 +3,11 @@
 import os
 import logging
 import json
+import pandas as pd
 from datetime import datetime
 from typing import Dict, List
+from apollo11.report_generator import ReportGenerator as rg
+
 
 class DashboardGenerator:
     def __init__(self):
@@ -15,11 +18,13 @@ class DashboardGenerator:
         # Nombre y ruta del archivo de tablero de control
         dashboard_filename = 'dashboard.json'
         dashboard_path = os.path.join('reports', dashboard_filename)
+        report_filename = f'APLSTATS-REPORT-{datetime.now().strftime("%d%m%y%H%M%S")}.log'
+        report_path = os.path.join('reports', report_filename)
 
         # Estructura de datos del tablero de control
         dashboard_data = {
             'last_update': datetime.now().strftime('%d%m%y%H%M%S'),
-            'missions': {}
+
         }
 
         # Agregar información de dispositivos por misión al tablero de control
