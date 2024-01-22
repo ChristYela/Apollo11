@@ -49,7 +49,7 @@ class Apolo11Simulator:
                 self.dashboard_generator.generate_dashboard(
                     210124120000, 210124129999)
 
-                logging.debug(
+                logging.info(
                     "Ciclo completado. Esperando el próximo ciclo...")
                 time.sleep(self.simulation_interval)
 
