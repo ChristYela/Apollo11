@@ -40,7 +40,7 @@ class ReportGenerator:
         for project, device_states in self.project_device_states.items():
             for state, count in device_states.items():
                 device_dict[state] = count
-            mision_status['device_status'] = device_dict
+            mision_status.update(device_dict)
             mision_status['disconnections'] = device_dict['unknown']
             mision_status['inoperable_devices'] = device_dict['faulty'] + \
                 device_dict['killed']
@@ -56,12 +56,10 @@ class ReportGenerator:
         mision_status['percentages'] = percentages
         self.report[project] = mision_status
 
-        logging.info(f"Informe consolidado generado: {report_filename}")
-        logging.info(self.project_device_states)
-        logging.info(self.report)
+        logging.debug(f"Informe consolidado generado: {report_filename}")
 
         with open(report_path, 'w', encoding='utf-8') as report_file:
-            report_file.write(json.dumps(self.report))
+            report_file.write(json.dumps(self.report, indent=4))
 
     def get_current_timestamp(self):
         """

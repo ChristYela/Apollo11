@@ -17,7 +17,7 @@ def main():
         parser.add_argument(
             "--config", help="Ruta al archivo de configuración YAML", default="config/config.yml")
         parser.add_argument("--project", help="Proyecto a simular",
-                            choices=["ORBONE", "CLNM", "TMRS", "GALXONE", "UNKN"], default="UNKN")
+                            choices=["ORBONE", "CLNM", "TMRS", "GALXONE", "UNKN"], default='GALXONE')
         args = parser.parse_args()
 
         # Cargar configuraciones desde el archivo YAML
