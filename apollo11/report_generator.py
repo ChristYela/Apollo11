@@ -23,7 +23,10 @@ class ReportGenerator:
         # Inicializar el diccionario si aún no ha sido inicializado
         if not isinstance(self.project_device_states, dict):
             self.project_device_states = {}
-
+        # Se inicializan los diccionarios donde se almacenaran datos
+        percentages = {}
+        mision_status = {}
+        device_dict = {}
         # Actualizar el diccionario con nuevos datos
         for project, files in data.items():
             project_states = {'excellent': 0, 'good': 0,
@@ -34,9 +37,7 @@ class ReportGenerator:
         # Generar un único informe consolidado
         report_filename = f'APLSTATS-REPORT-{datetime.now().strftime("%d%m%y%H%M%S")}.log'
         report_path = os.path.join('reports', report_filename)
-        percentages = {}
-        mision_status = {}
-        device_dict = {}
+        # Se hace un recuento de los dispositivos que se encuentran en cada estado
         for project, device_states in self.project_device_states.items():
             for state, count in device_states.items():
                 device_dict[state] = count
@@ -44,6 +45,7 @@ class ReportGenerator:
             mision_status['disconnections'] = device_dict['unknown']
             mision_status['inoperable_devices'] = device_dict['faulty'] + \
                 device_dict['killed']
+        # Se hace un calculo del porcentaje de dispositivos que hay en cada estado.
         for project in self.project_device_states.keys():
             total_devices = sum(
                 device_states[state] for state in self.project_device_states[project])
@@ -57,7 +59,7 @@ class ReportGenerator:
         self.report[project] = mision_status
 
         logging.debug(f"Informe consolidado generado: {report_filename}")
-
+        # Se guarda el reporte en un archivo .log en la carpeta ./devices
         with open(report_path, 'w', encoding='utf-8') as report_file:
             report_file.write(json.dumps(self.report, indent=4))
 

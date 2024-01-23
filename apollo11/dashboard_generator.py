@@ -17,26 +17,29 @@ class DashboardGenerator:
 
         def dashboard_data_update(self, data_dash: dict, data_add: dict):
             """
-            Esta funcion sumara los nuevos reportes a un diccionario global
+            Esta funcion sumara al primer parametro la informacion del diccionario enviado como segundo parametro, se usa para agregar informacion al diccionario de donde se genera el dashboard
+            parameters:
+            - data_dash (Dict[str, Dict[str, int]]): El diccionario base
+            - data_add (Dict[str, Dict[str, int]]): El diccionario a sumar
             """
             for key, value in data_add.items():
 
                 if type(value) == dict:
                     for keys, values in value.items():
                         if keys != 'percentages':
-                            val1 = data_dash[key][keys]
-                            val2 = data_add[key][keys]
-                            data_dash[key][keys] = val1 + val2
+                            value_db = data_dash[key][keys]
+                            value_new_date = data_add[key][keys]
+                            data_dash[key][keys] = value_db + value_new_date
                         else:
                             continue
                 else:
-                    val1 = data_dash[key]
-                    val2 = data_add[key]
-                    data_dash[key] = val1 + val2
+                    value_db = data_dash[key]
+                    value_new_date = data_add[key]
+                    data_dash[key] = value_db + value_new_date
             with open(dashboard_path, 'w') as report_file:
                 report_file.write(json.dumps(data_dash, indent=4))
 
-        def dashboard_data_clean(self,):
+        def dashboard_data_clean():
             """
             Se usa para limpiar el historial de las misiones
 
@@ -51,21 +54,29 @@ class DashboardGenerator:
                     report_file.write(json.dumps(dashboard_dict, indent=4))
 
         def print_dashboard():
+            """
+            Se usa para imprimir el dashboard con los reportes almacenados en la carpeta ./devices
+
+            """
+            # Se declaran listas vacias para filas y columnas del dashboard
             filas = []
             columnas = []
+            # Se abre el archivo Json con la informacion acumulada de todos los reportes
             with open(dashboard_path, 'r') as report_file:
                 dashboard_dict = json.load(report_file)
+            # Se agrega la informacion del json a las listas de filas y columnas
             for key, value in dashboard_dict.items():
                 if dashboard_dict[key]['total_devices'] != 0:
 
                     for keys, values in value.items():
                         percentage = round(
                             100*value[keys]/dashboard_dict[key]['total_devices'], 2)
-                        value[keys] = f'{values}-{percentage}%'
+                        value[keys] = f'{values}({percentage}%)'
                 else:
                     continue
                 filas.append(key)
                 columnas.append(value)
+            # Se crea e imprime el dataframe con el uso de la libreria Pandas
             db = pd.DataFrame(columnas, index=filas)
             print(db)
             logging.debug(
@@ -78,7 +89,7 @@ class DashboardGenerator:
         # Crear un diccionario en blanco
         with open(dashboard_path, 'r') as report_file:
             dashboard_dict = json.load(report_file)
-        # Llamar los reportes acumulados
+        # Llamar y correr los reportes acumulados
         content = os.listdir('./reports')
         for report_file in content:
             filename = report_file
@@ -88,17 +99,12 @@ class DashboardGenerator:
             dashboard_data_update(self, dashboard_dict, act_report_file)
             logging.debug(
                 f"Se esta agregando el archivo {report_file} al dashboard")
+        # Se imprime el dashboard
         print_dashboard()
-        dashboard_data_clean(self)
+        # Se limpia el archivo dashboard para evitar sobre-escritura
+        dashboard_data_clean()
         logging.debug(
             f"Se limpiaron lo registros de dashboard.json")
+        # Se imprime imformacion sobre la hora de la ultima actualizacion
         time = datetime.now().strftime('%Y%m%d%H%M%S')
         logging.info(f'Ultima actualización {time}')
-
-        # Estructura de datos del tablero de control
-
-        # Agregar información de dispositivos por misión al tablero de control
-
-        # Escribir el tablero de control en un archivo JSON
-
-        # Registrar en el registro que el tablero de control ha sido actualizado
