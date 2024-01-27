@@ -69,6 +69,11 @@ Each file is associated with an execution cycle, ensuring precise control and op
 
 "Make sure to provide the --config argument with the path to the YAML configuration file."
 
+## Testing
+The project includes a comprehensive set of unit tests. Run the tests using:
+
+"python -m unittest discover -s tests" 
+
 
 ## Project Components
 
