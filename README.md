@@ -70,6 +70,40 @@ Each file is associated with an execution cycle, ensuring precise control and op
 "Make sure to provide the --config argument with the path to the YAML configuration file."
 
 
+##Project Components
+
+apollo11.py: The main script that orchestrates the simulation.
+
+data_generator.py: Generates simulated data for devices in a mission.
+
+file_manager.py: Manages generated files and moves processed files to backups.
+
+report_generator.py: Generates consolidated reports based on simulated data.
+
+dashboard_generator.py: Generates dashboards using accumulated data.
+
+simulator.py: Coordinates the simulation cycles and handles interruptions.
+
+
+##Configuration
+
+config/config.yml contains project configuration settings like simulation interval and available projects.
+
+##Improvements
+
+Short-Term:
+Implement continuous integration for automated testing.
+Enhance error handling and logging for better debugging.
+
+Medium-Term:
+Add functionality for dynamic project addition/removal.
+Improve the user interface for better user interaction during simulation.
+
+Long-Term:
+Integrate with a web-based dashboard for real-time monitoring.
+Expand simulation capabilities to include external inputs and events.
+
+
 
 # Apollo11
 Final Project Python for SoftServe
@@ -88,5 +122,13 @@ Tree
 │ ├── config.yml
 ├── backups
 ├── reports
+|-- tests/
+|   |-- __init__.py
+|   |-- test_apollo11.py
+|   |-- test_dashboard_generator.py
+|   |-- test_data_generator.py
+|   |-- test_file_manager.py
+|   |-- test_report_generator.py
+|   |-- test_simulator.py
 └── apollo11.py
 ```
