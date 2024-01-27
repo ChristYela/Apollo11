@@ -70,7 +70,7 @@ Each file is associated with an execution cycle, ensuring precise control and op
 "Make sure to provide the --config argument with the path to the YAML configuration file."
 
 
-##Project Components
+## Project Components
 
 apollo11.py: The main script that orchestrates the simulation.
 
@@ -85,11 +85,11 @@ dashboard_generator.py: Generates dashboards using accumulated data.
 simulator.py: Coordinates the simulation cycles and handles interruptions.
 
 
-##Configuration
+## Configuration
 
 config/config.yml contains project configuration settings like simulation interval and available projects.
 
-##Improvements
+## Improvements
 
 Short-Term:
 Implement continuous integration for automated testing.
