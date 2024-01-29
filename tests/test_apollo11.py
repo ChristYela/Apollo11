@@ -1,21 +1,16 @@
-import unittest
-from unittest.mock import patch
+# tests/test_simulator.py
+import pytest
 from io import StringIO
-from apollo11 import main  # Importa directamente la función main desde el módulo apollo11
+import time
+from apollo11.simulator import Apolo11Simulator
 
-class TestApolo11(unittest.TestCase):
-    @patch('sys.stdout', new_callable=StringIO)
-    def test_main(self, mock_stdout):
-        # Prueba la función main en apollo11.py
-        with self.assertRaises(SystemExit) as context:
-            main()
-        
-        # Verifica que la salida sea correcta
-        self.assertEqual(context.exception.code, 0)
-        
-        # Verifica que el mensaje esperado esté en la salida estándar
-        expected_output = "Ciclo completado. Esperando el próximo ciclo..."
-        self.assertIn(expected_output, mock_stdout.getvalue())
+def test_run_simulation(monkeypatch, capsys):
+    # Mockear time.sleep para evitar esperas largas durante las pruebas
+    monkeypatch.setattr(time, 'sleep', lambda x: None)
 
-if __name__ == '__main__':
-    unittest.main()
+    simulator = Apolo11Simulator(20, 10, 5, 'ORBONE')
+    simulator.run_simulation(2)  # Ejecutar dos ciclos de simulación
+
+    captured = capsys.readouterr()
+    assert "Ciclo completado. Esperando el próximo ciclo..." in captured.out
+
