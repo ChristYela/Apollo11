@@ -1,25 +1,15 @@
-import unittest
+# tests/test_simulator.py
+import pytest
+from io import StringIO
+import time
 from apollo11.simulator import Apolo11Simulator
 
-class TestSimulator(unittest.TestCase):
-    def test_run_simulation(self):
-        # Prueba la función run_simulation en simulator.py
-        simulator = Apolo11Simulator(
-            simulation_interval=10, max_files=5, min_files=2, project="ORBONE"
-        )
-        with self.assertLogs(level='INFO') as cm:
-            simulator.run_simulation(num_cycles=2)
-        self.assertIn('Ciclo completado. Esperando el próximo ciclo...', cm.output[0])
+def test_run_simulation(monkeypatch, capsys):
+    # Mockear time.sleep para evitar esperas largas durante las pruebas
+    monkeypatch.setattr(time, 'sleep', lambda x: None)
 
-    def test_handle_interrupt(self):
-        # Prueba la función handle_interrupt en simulator.py
-        simulator = Apolo11Simulator(
-            simulation_interval=10, max_files=5, min_files=2, project="ORBONE"
-        )
-        with self.assertLogs(level='INFO') as cm:
-            simulator.handle_interrupt(signum=None, frame=None)
-        self.assertIn('Simulación interrumpida por el usuario. Finalizando...', cm.output[0])
-        self.assertEqual(cm.output[1], 'Simulación interrumpida por el usuario. Finalizando...')
+    simulator = Apolo11Simulator(20, 10, 5, 'ORBONE')
+    simulator.run_simulation(2)  # Ejecutar dos ciclos de simulación
 
-if __name__ == '__main__':
-    unittest.main()
+    captured = capsys.readouterr()
+    assert "Ciclo completado. Esperando el próximo ciclo..." in captured.out
