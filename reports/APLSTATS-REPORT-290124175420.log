@@ -1,0 +1,97 @@
+{
+    "GALXONE": {
+        "excellent": 5,
+        "good": 14,
+        "warning": 12,
+        "faulty": 16,
+        "killed": 5,
+        "unknown": 10,
+        "disconnections": 10,
+        "inoperable_devices": 21,
+        "total_devices": 62,
+        "percentages": {
+            "excellent": 6.25,
+            "good": 10.416666666666668,
+            "warning": 4.166666666666666,
+            "faulty": 4.166666666666666,
+            "killed": 2.083333333333333,
+            "unknown": 10.416666666666668
+        }
+    },
+    "UNKN": {
+        "excellent": 6,
+        "good": 6,
+        "warning": 8,
+        "faulty": 5,
+        "killed": 8,
+        "unknown": 8,
+        "disconnections": 8,
+        "inoperable_devices": 13,
+        "total_devices": 41,
+        "percentages": {
+            "excellent": 6.25,
+            "good": 10.416666666666668,
+            "warning": 4.166666666666666,
+            "faulty": 4.166666666666666,
+            "killed": 2.083333333333333,
+            "unknown": 10.416666666666668
+        }
+    },
+    "TMRS": {
+        "excellent": 4,
+        "good": 8,
+        "warning": 8,
+        "faulty": 10,
+        "killed": 5,
+        "unknown": 4,
+        "disconnections": 4,
+        "inoperable_devices": 15,
+        "total_devices": 39,
+        "percentages": {
+            "excellent": 6.25,
+            "good": 10.416666666666668,
+            "warning": 4.166666666666666,
+            "faulty": 4.166666666666666,
+            "killed": 2.083333333333333,
+            "unknown": 10.416666666666668
+        }
+    },
+    "CLNM": {
+        "excellent": 8,
+        "good": 9,
+        "warning": 7,
+        "faulty": 6,
+        "killed": 6,
+        "unknown": 7,
+        "disconnections": 7,
+        "inoperable_devices": 12,
+        "total_devices": 43,
+        "percentages": {
+            "excellent": 6.25,
+            "good": 10.416666666666668,
+            "warning": 4.166666666666666,
+            "faulty": 4.166666666666666,
+            "killed": 2.083333333333333,
+            "unknown": 10.416666666666668
+        }
+    },
+    "ORBONE": {
+        "excellent": 5,
+        "good": 10,
+        "warning": 8,
+        "faulty": 6,
+        "killed": 4,
+        "unknown": 15,
+        "disconnections": 15,
+        "inoperable_devices": 10,
+        "total_devices": 48,
+        "percentages": {
+            "excellent": 6.25,
+            "good": 10.416666666666668,
+            "warning": 4.166666666666666,
+            "faulty": 4.166666666666666,
+            "killed": 2.083333333333333,
+            "unknown": 10.416666666666668
+        }
+    }
+}

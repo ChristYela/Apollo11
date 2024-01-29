@@ -1,0 +1,67 @@
+{
+    "GALXONE": [
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_6",
+            "device_status": "good",
+            "hash": "14fbb5ba58f668ecd1ff7ea177f5a66d"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_4",
+            "device_status": "killed",
+            "hash": "cfd5996670844ec412d0b17bec425236"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_1",
+            "device_status": "unknown",
+            "hash": "0733cb97eea8bc2ffd948300404342bd"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_10",
+            "device_status": "unknown",
+            "hash": "f246426969034440193d743371623e9b"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_2",
+            "device_status": "excellent",
+            "hash": "240974a42f732e3935bbba13744a4cbe"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_5",
+            "device_status": "killed",
+            "hash": "d42c9b936730060276cddeeaf3376907"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_4",
+            "device_status": "faulty",
+            "hash": "fc2daa0db86d72617a92a0ae38ec5f9e"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_8",
+            "device_status": "good",
+            "hash": "727dbaaa10c342a077d48d0aaf087032"
+        },
+        {
+            "date": "290124175216",
+            "mission": "GALXONE",
+            "device_type": "device_8",
+            "device_status": "unknown",
+            "hash": "08d56f3c139260be7a98cd9b601aa2db"
+        }
+    ]
+}

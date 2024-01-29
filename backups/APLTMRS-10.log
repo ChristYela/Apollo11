@@ -1,0 +1,74 @@
+{
+    "TMRS": [
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_9",
+            "device_status": "warning",
+            "hash": "404fbbfb6d74174fdad7e2f8bba12ee9"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_7",
+            "device_status": "warning",
+            "hash": "e392fcdb69387296bd6399fbca8f54b5"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_8",
+            "device_status": "faulty",
+            "hash": "7cbac4e07f240cbfb8cbfc57f654d6c2"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_3",
+            "device_status": "faulty",
+            "hash": "0be5d8498b71433c23390fb64c88e88f"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_3",
+            "device_status": "killed",
+            "hash": "ca518d49b61858be5bbb1952e410b630"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_9",
+            "device_status": "good",
+            "hash": "e17d929a65cbbcf2c60333abffa6eb87"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_9",
+            "device_status": "excellent",
+            "hash": "48118bbf6d7caebcdf588290f3d3b80f"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_10",
+            "device_status": "warning",
+            "hash": "e55e375445ec020feac0f444c739eda7"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_6",
+            "device_status": "warning",
+            "hash": "e04614936dcd70e54e275801fc62763a"
+        },
+        {
+            "date": "290124175403",
+            "mission": "TMRS",
+            "device_type": "device_4",
+            "device_status": "unknown",
+            "hash": "693f95a5f86707431e7fd210bf35f894"
+        }
+    ]
+}
