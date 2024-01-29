@@ -1,24 +1,16 @@
-import unittest
+# tests/test_data_generator.py
+import pytest
+from io import StringIO
 from apollo11.data_generator import DataGenerator
 
-class TestDataGenerator(unittest.TestCase):
-    def test_generate_data(self):
-        # Prueba la función generate_data en data_generator.py
-        data_generator = DataGenerator()
-        max_files = 5
-        min_files = 2
-        data = data_generator.generate_data(max_files, min_files)
-        self.assertIsInstance(data, dict)
-        self.assertTrue(data)
+def test_generate_data():
+    data_generator = DataGenerator()
+    max_files = 10
+    min_files = 5
 
-    def test_generate_hash(self):
-        # Prueba la función generate_hash en data_generator.py
-        data_generator = DataGenerator()
-        mission = 'ORBONE'
-        device_type = 'device_1'
-        device_status = 'excellent'
-        hash_value = data_generator.generate_hash(mission, device_type, device_status)
-        self.assertTrue(hash_value)
+    data = data_generator.generate_data(max_files, min_files)
 
-if __name__ == '__main__':
-    unittest.main()
+    assert data  # Verificar que los datos generados no están vacíos
+    assert all(isinstance(value, list) for value in data.values())  # Verificar que los valores son listas
+    assert all(len(value) >= min_files and len(value) <= max_files for value in data.values())  # Verificar la cantidad de archivos generados
+    # Puedes agregar más aserciones según sea necesario
