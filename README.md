@@ -72,7 +72,7 @@ Each file is associated with an execution cycle, ensuring precise control and op
 ## Testing
 The project includes a comprehensive set of unit tests. Run the tests using:
 
-"python -m unittest discover -s tests" 
+"pytest" 
 
 
 ## Project Components
