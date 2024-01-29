@@ -1,16 +1,19 @@
-# tests/test_simulator.py
+# tests/test_apollo11.py
 import pytest
 from io import StringIO
-import time
-from apollo11.simulator import Apolo11Simulator
+from apollo11 import main
 
-def test_run_simulation(monkeypatch, capsys):
-    # Mockear time.sleep para evitar esperas largas durante las pruebas
-    monkeypatch.setattr(time, 'sleep', lambda x: None)
+@pytest.mark.parametrize("args, expected_output", [
+    (["--config", "config/config.yml", "--project", "ORBONE"], "Ciclo completado. Esperando el próximo ciclo..."),
+    # Agrega más combinaciones de argumentos y salidas esperadas según sea necesario
+])
+def test_main(args, expected_output, monkeypatch, capsys):
+    monkeypatch.setattr("sys.argv", ["apollo11.py"] + args)
 
-    simulator = Apolo11Simulator(20, 10, 5, 'ORBONE')
-    simulator.run_simulation(2)  # Ejecutar dos ciclos de simulación
+    with pytest.raises(SystemExit) as context:
+        main()
 
+    assert context.value.code == 0
     captured = capsys.readouterr()
-    assert "Ciclo completado. Esperando el próximo ciclo..." in captured.out
+    assert expected_output in captured.out
 
