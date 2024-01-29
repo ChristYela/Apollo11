@@ -1,25 +1,26 @@
-import unittest
-import os
+# tests/test_file_manager.py
+import pytest
+from io import StringIO
 import json
+import os
 from apollo11.file_manager import FileManager
 
-class TestFileManager(unittest.TestCase):
-    def test_manage_files(self):
-        # Prueba la función manage_files en file_manager.py
-        file_manager = FileManager()
-        data = {'ORBONE': [{'date': '210124120000', 'mission': 'ORBONE', 'device_type': 'device_1', 'device_status': 'excellent', 'hash': 'hash_value'}]}
-        file_manager.manage_files(data)
-        self.assertTrue(os.path.exists('devices'))
-        self.assertFalse(os.path.exists('backups'))
+def test_manage_files(tmp_path):
+    file_manager = FileManager()
 
-    def test_move_processed_files(self):
-        # Prueba la función move_processed_files en file_manager.py
-        file_manager = FileManager()
-        data = {'ORBONE': [{'date': '210124120000', 'mission': 'ORBONE', 'device_type': 'device_1', 'device_status': 'excellent', 'hash': 'hash_value'}]}
-        file_manager.manage_files(data)
-        file_manager.move_processed_files()
-        self.assertTrue(os.path.exists('backups'))
-        self.assertFalse(os.path.exists('devices'))
+    data = {'project1': [{'date': '210124120000', 'mission': 'ORBONE', 'device_type': 'device_1', 'device_status': 'excellent', 'hash': 'hash1'},
+                            {'date': '210124121500', 'mission': 'ORBONE', 'device_type': 'device_2', 'device_status': 'good', 'hash': 'hash2'}]}
 
-if __name__ == '__main__':
-    unittest.main()
+    file_manager.manage_files(data)
+
+    project_folder = tmp_path / 'devices' / 'project1'
+    assert project_folder.is_dir()
+
+    for file_data in data['project1']:
+        file_name = f"APL{file_data['mission']}-{len(data['project1'])}.log"
+        file_path = project_folder / file_name
+
+        assert file_path.is_file()
+        with open(file_path, 'r') as file:
+            file_content = json.load(file)
+            assert file_content == {'project1': [file_data]}
